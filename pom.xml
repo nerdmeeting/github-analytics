@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.example.github</groupId>
-	<artifactId>github-analytics-database</artifactId>
+	<artifactId>github-analytics</artifactId>
 	<version>0.0.1.M1</version>
 	<packaging>jar</packaging>
 
