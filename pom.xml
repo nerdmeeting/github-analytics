@@ -4,8 +4,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.example.github</groupId>
-	<artifactId>github-analytics</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>github-analytics-database</artifactId>
+	<version>0.0.1.M1</version>
 	<packaging>jar</packaging>
 
 	<name>analytics</name>
@@ -14,15 +14,15 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.4.1.RELEASE</version>
+		<version>1.4.5.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
-		<spring-cloud-contract.version>1.0.0.RELEASE</spring-cloud-contract.version>
-		<spring-cloud-bom.version>Camden.RELEASE</spring-cloud-bom.version>
+		<spring-cloud-contract.version>1.0.4.RELEASE</spring-cloud-contract.version>
+		<spring-cloud-bom.version>Camden.SR6</spring-cloud-bom.version>
 		<!-- [PIPELINE] Stub group, artifact ids needed by Stub Runner -->
 		<stubrunner.ids>com.example.github:github-webhook</stubrunner.ids>
 		<!-- [PIPELINE] -->
@@ -33,15 +33,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.analytics</groupId>
-			<artifactId>spring-analytics</artifactId>
-			<version>1.0.1.RELEASE</version>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka</artifactId>
 		</dependency>
-		<!-- Dunno Why -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
@@ -101,7 +95,7 @@
 				<version>${spring-cloud-contract.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-					<baseClassForTests>org.springframework.github.contract.BaseClass</baseClassForTests>
+					<baseClassForTests>org.springframework.github.BaseClass</baseClassForTests>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -182,64 +176,6 @@
 			<name>Spring Milestone Repository</name>
 			<url>${distribution.management.release.url}</url>
 		</repository>
-		<snapshotRepository>
-			<id>repo.spring.io</id>
-			<name>Spring Snapshot Repository</name>
-			<url>https://repo.spring.io/libs-snapshot-local</url>
-		</snapshotRepository>
 	</distributionManagement>
-
-	<repositories>
-		<repository>
-			<id>spring-snapshots</id>
-			<name>Spring Snapshots</name>
-			<url>https://repo.spring.io/snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>https://repo.spring.io/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>spring-releases</id>
-			<name>Spring Releases</name>
-			<url>https://repo.spring.io/release</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>spring-snapshots</id>
-			<name>Spring Snapshots</name>
-			<url>https://repo.spring.io/snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
-		<pluginRepository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>https://repo.spring.io/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-		<pluginRepository>
-			<id>spring-releases</id>
-			<name>Spring Releases</name>
-			<url>https://repo.spring.io/release</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
 
 </project>
