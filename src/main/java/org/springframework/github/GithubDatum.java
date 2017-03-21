@@ -15,6 +15,7 @@
  */
 package org.springframework.github;
 
+
 public class GithubDatum {
 
 	private String username;

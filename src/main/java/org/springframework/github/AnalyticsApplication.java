@@ -14,7 +14,7 @@ public class AnalyticsApplication {
 		SpringApplication.run(AnalyticsApplication.class, args);
 	}
 
-	@Bean GithubDataListener githubDataListener() {
-		return new GithubDataListener();
+	@Bean GithubDataListener githubDataListener(IssuesRepository repository) {
+		return new GithubDataListener(repository);
 	}
 }

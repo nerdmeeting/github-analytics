@@ -16,9 +16,6 @@
 package org.springframework.github;
 
 import java.lang.invoke.MethodHandles;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -32,33 +29,27 @@ class GithubDataListener {
 
 	private static final Log log = LogFactory.getLog(MethodHandles.lookup().lookupClass());
 
-	Map<String, Object> counter = new HashMap<>();
-	AtomicInteger stats = new AtomicInteger();
+	private final IssuesRepository repository;
+
+	GithubDataListener(IssuesRepository repository) {
+		this.repository = repository;
+	}
 
 	@StreamListener(Sink.INPUT)
 	public void listen(GithubDatum data) {
 		log.info("Received a new message [" + data + "]");
-		processValue("repository", data.getRepository());
-		processValue("username", data.getUsername());
-		processValue("type", data.getType());
-		processValue("action", data.getAction());
-		stats.incrementAndGet();
+		repository.save(new Issues(data.getUsername(), data.getRepository()));
 	}
 
 	@GetMapping("/count")
-	public int count() {
-		int size = this.stats.get();
-		log.info("Size of counters equals [" + size + "]");
+	public long count() {
+		long size = repository.count();
+		log.info("Size of issues equals [" + size + "]");
 		return size;
 	}
 
 	void clear() {
-		counter.clear();
-	}
-
-	public void processValue(String counterName, Object value) {
-		counter.put(counterName, value);
-		stats.incrementAndGet();
+		repository.deleteAll();
 	}
 
 }
