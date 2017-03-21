@@ -19,15 +19,15 @@ import static org.assertj.core.api.BDDAssertions.then;
 public class AnalyticsApplicationTests {
 
 	@Autowired StubTrigger stubTrigger;
-	@Autowired GithubDataListener githubDataListener;
+	@Autowired IssuesRepository repo;
 
 	@Test
 	public void should_store_a_new_issue() {
-		assertThat(this.githubDataListener.count()).isEqualTo(1L);
+		assertThat(this.repo.count()).isEqualTo(0L);
 
 		this.stubTrigger.trigger("issue_created_v2");
 
-		then(this.githubDataListener.count()).isEqualTo(2L);
+		then(this.repo.count()).isEqualTo(1L);
 	}
 
 }

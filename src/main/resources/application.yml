@@ -1,5 +1,9 @@
 spring:
   application.name: github-analytics
+
   cloud.stream.bindings.input.destination: messages
-  jpa.hibernate.ddl-auto: validate
+
+  jpa:
+    database: MYSQL
+
 server.port: ${PORT:8081}

@@ -1,5 +1,8 @@
 package org.springframework.github;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -21,11 +24,11 @@ import static org.mockito.BDDMockito.given;
 @AutoConfigureMessageVerifier
 public class BaseClass {
 
-	@Autowired GithubDataListener githubDataListener;
+	@Autowired IssuesController controller;
 
 	@Before
 	public void setup() {
-		RestAssuredMockMvc.standaloneSetup(githubDataListener);
+		RestAssuredMockMvc.standaloneSetup(controller);
 
 	}
 
@@ -33,7 +36,15 @@ public class BaseClass {
 		@Bean IssuesRepository repository() {
 			IssuesRepository repo = Mockito.mock(IssuesRepository.class);
 			given(repo.count()).willReturn(5L);
+			given(repo.findAll()).willReturn(issues());
 			return repo;
 		}
+
+		private List<Issues> issues() {
+			List<Issues> dtos = new ArrayList<>();
+			dtos.add(new Issues("foo", "spring-cloud/bar"));
+			return dtos;
+		}
+
 	}
 }

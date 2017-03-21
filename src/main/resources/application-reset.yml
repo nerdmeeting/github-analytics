@@ -1,3 +1,3 @@
 # work to be done to clear the database schema before running smoke tests
 spring:
-  jpa.hibernate.ddl-auto: create-drop
+  jpa.hibernate.ddl-auto: create

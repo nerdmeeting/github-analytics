@@ -37,6 +37,7 @@ public class IntegrationTests {
 	public void shouldStoreAMessageWhenGithubDataWasReceivedViaMessaging() {
 		final Integer countOfEntries = countGithubData();
 		log.info("Initial count is [" + countOfEntries + "]");
+
 		ResponseEntity<Map> response = triggerMessage();
 		then(response.getStatusCode().is2xxSuccessful()).isTrue();
 		log.info("Triggered additional message");

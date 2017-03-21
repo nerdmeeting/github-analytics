@@ -1,1 +1,8 @@
-spring.rabbitmq.addresses: ${vcap.services.github-rabbitmq.credentials.uri}
+spring:
+  rabbitmq.addresses: ${vcap.services.github-rabbitmq.credentials.uri}
+  jpa.hibernate.ddl-auto: update
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.99.100/github?autoReconnect=true&useSSL=false
+    username: root
+    password: test

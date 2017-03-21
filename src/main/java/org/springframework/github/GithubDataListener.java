@@ -17,17 +17,16 @@ package org.springframework.github;
 
 import java.lang.invoke.MethodHandles;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.cloud.stream.messaging.Sink;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Component;
 
-@RestController
+@Component
 class GithubDataListener {
 
-	private static final Log log = LogFactory.getLog(MethodHandles.lookup().lookupClass());
+	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
 	private final IssuesRepository repository;
 
@@ -37,19 +36,8 @@ class GithubDataListener {
 
 	@StreamListener(Sink.INPUT)
 	public void listen(GithubDatum data) {
-		log.info("Received a new message [" + data + "]");
+		log.info("Received a new message [{}]", data);
 		repository.save(new Issues(data.getUsername(), data.getRepository()));
-	}
-
-	@GetMapping("/count")
-	public long count() {
-		long size = repository.count();
-		log.info("Size of issues equals [" + size + "]");
-		return size;
-	}
-
-	void clear() {
-		repository.deleteAll();
 	}
 
 }

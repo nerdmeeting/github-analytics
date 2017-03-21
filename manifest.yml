@@ -3,7 +3,7 @@ applications:
 - name: github-analytics
   services:
     - github-rabbitmq
-    - github-eureka
+    - github-mysql
   env:
     SPRING_PROFILES_ACTIVE: cloud
     DEBUG: "true"
